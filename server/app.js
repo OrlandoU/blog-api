@@ -24,7 +24,7 @@ app.use('/posts', postsRouter);
 app.use('/auth', authRouter)
 
 mongoose.set('strictQuery', true)
-const connectionString = 'mongodb+srv://orlando:Adeus2003@cluster0.xzhigzf.mongodb.net/blog-api?retryWrites=true&w=majority'
+const connectionString = '
 main().catch(err=>console.log(err))
 async function main(){
   await mongoose.connect(connectionString)
