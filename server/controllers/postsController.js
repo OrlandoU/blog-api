@@ -18,6 +18,14 @@ exports.post_post = [
         .escape()
         .isLength({ min: 1 })
         .withMessage('Content Invalid Length')
+    ,
+    body('title')
+        .trim()
+        .escape()
+        .isLength({ min: 1 })
+        .withMessage('Invalid title length')
+        .isAlphanumeric()
+        .withMessage('Title contains non-alphanumeric characters')
     , async (req, res, next) => {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
@@ -25,7 +33,8 @@ exports.post_post = [
         }
         try {
             const post = new Post({
-                content: req.body.content
+                content: req.body.content,
+                title: req.body.title
             })
 
             await post.save()
@@ -53,6 +62,14 @@ exports.post_put = [
         .escape()
         .isLength({ min: 1 })
         .withMessage('Content Invalid Length')
+    ,
+    body('title')
+        .trim()
+        .escape()
+        .isLength({ min: 1 })
+        .withMessage('Invalid title length')
+        .isAlphanumeric()
+        .withMessage('Title contains non-alphanumeric characters')
     , async (req, res, next) => {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
@@ -61,7 +78,8 @@ exports.post_put = [
         try {
             const updatedPost = new Post({
                 _id: req.params.postid,
-                content: req.body.content
+                content: req.body.content,
+                title: req.body.title
             })
 
             const post = await Post.findByIdAndUpdate(req.params.postid, updatedPost, { new: true })
@@ -74,7 +92,7 @@ exports.post_put = [
 
 exports.post_delete = async (req, res, next) => {
     try {
-        await Comments.deleteMany({post: req.params.postid})
+        await Comments.deleteMany({ post: req.params.postid })
         const removedPost = await Post.findByIdAndRemove(req.params.postid)
         res.json(removedPost)
     } catch (error) {
@@ -84,12 +102,63 @@ exports.post_delete = async (req, res, next) => {
 
 exports.comments_get = async (req, res, next) => {
     try {
-        const comments = await Comments.find({post: req.params.postid})
+        const comments = await Comments.find({ post: req.params.postid })
         res.json({
             comments,
             results: comments.length
         })
     } catch (error) {
-        
+        next(error)
+    }
+}
+exports.comment_post = [
+    body('content')
+        .trim()
+        .escape()
+        .isLength({ min: 1 })
+        .withMessage('Content Invalid Length')
+    ,
+    async (req, res, next) => {
+        const errors = validationResult(req)
+
+        if (!errors.isEmpty()) {
+            res.sendStatus(400)
+        }
+
+        try {
+            const post = await Post.findById(req.params.postid)
+
+            if (!post) {
+                res.status(404).send('The requested post does not exist')
+            }
+
+            const comment = new Comment({
+                content: req.body.content
+            })
+
+            await comment.save()
+            
+            res.json(comment)
+        } catch (error) {
+            next(error)
+        }
+    }
+]
+
+exports.comment_delete = async (req, res, next) => {
+    try {
+        const removedComment = await Comments.findByIdAndRemove(req.params.postid)
+        res.json(removedComment)
+    } catch (error) {
+        next(error)
+    }
+}
+
+exports.comments_delete = async (req, res, next) => {
+    try {
+        await Comments.deleteMany({ post: req.params.postid })
+        res.sendStatus(200)
+    } catch (error) {
+        next(error)
     }
 }
