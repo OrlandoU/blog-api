@@ -1,12 +1,31 @@
 .App {
   text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
-
+svg{
+  width: 32px;
+  padding: 4px;
+  transition: 300ms;
+  border-radius: 50%;
+}
+svg:hover{
+  background-color: #e4e4e4;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
-
+.flex{
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+}
+.flex p{
+  margin-top: 4px !important;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -35,4 +54,172 @@
   to {
     transform: rotate(360deg);
   }
+}
+p{
+  white-space: pre-line;
+}
+
+ul{
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+nav{
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.153);
+  display: flex;
+  justify-content: space-between;
+  padding: 18px;
+  position: sticky;
+  top: 0px;
+  align-items: center;
+  background-color: white;
+}
+main{
+  padding: 36px;
+  flex: 1;
+  margin-bottom: 56px !important;
+}
+.posts-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+.post-preview .hidden-menu{
+  color: #282c34;
+}
+.post-preview .hidden-menu svg{
+  fill: #282c34;
+}
+.post-preview svg{
+  fill: white;
+}
+.post-preview svg:hover{
+  background-color: rgba(128, 128, 128, 0.295);
+}
+.post-preview:nth-child(2n) svg{
+  fill: #282c34;
+}
+.post-preview:nth-child(2n){
+  background-color: white;
+  color: #282c34;
+}
+.post-preview:nth-child(2n) .preview-bottom{
+  color: rgb(80, 80, 80);
+}
+.post-preview p{
+  color: rgb(173, 173, 173);
+  margin: 0px;
+}
+.post-preview:nth-child(2n) p{
+  color: gray;
+}
+.post-preview > *{
+  margin: 0px;
+}
+.nav-links{
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.nav-links > * > *{
+  text-decoration: none;
+  padding: 8px 12px;
+  color: #282c34;
+  font-weight: 600;
+}
+.nav-links > * > *:hover{
+  background-color: #282c3410;
+}
+.modal-wrapper{
+  z-index: 100;
+  display: none;
+  position: fixed;
+  width: 100vw;
+  min-height: 100vh;
+  inset: 0;
+  backdrop-filter: blur(4px);
+  background-color: #282c340c;
+  overflow: auto;
+}
+.modal{
+  padding: 36px;
+  padding-bottom: 56px;
+  text-align: center;
+  height: fit-content;
+  margin: auto;
+  background-color: white;
+  width: clamp(0px, 100%, 600px);
+  color: #282c34;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.153);
+  border-radius: 15px;
+}
+input:checked + .modal-wrapper{
+  display: flex;
+}
+
+.hidden-checkbox:checked + .hidden-menu{
+  display: flex;
+}
+.opt-button{
+  position: relative;
+}
+.hidden-menu{
+  z-index: 1;
+  position: absolute;
+  display: none;
+  top: 70%;
+  right: 70%;
+  flex-direction: column;
+  white-space: nowrap;
+  font-weight: 500;
+  justify-content: center;
+  background-color: white;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.153);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.opt svg:hover{
+  background-color: initial;
+}
+.opt{
+  padding: .5rem;
+  width: 210px;
+  font-size: .95rem;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  gap: 4px;
+  border-bottom: 1px solid gainsboro;
+}
+.opt.delete:hover{
+  background-color: rgb(255, 227, 222);
+  color: rgb(255, 30, 0);
+}
+.opt.opt.update:hover:hover {
+  background-color: #f0f6ff;
+  color: #387cfa;
+}
+.opt{
+  cursor: pointer;
+}
+.opt.delete:hover svg{
+  fill: rgb(255, 30, 0);
+}
+.opt.update:hover svg{
+  fill: #387cfa
+}
+.opt:last-child{
+  border: 0px;
+}
+a{
+  color: inherit;
+}
+.user-button > a{
+  background-color: #282c34;
+  color: white;
+  border-radius: 50px;
+}
+.user-button > a:hover {
+  background-color: #282c34;
+  color: white;
 }

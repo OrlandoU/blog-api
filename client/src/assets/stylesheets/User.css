@@ -1,0 +1,75 @@
+.user-container {
+    width: clamp(0px, 100%, 950px);
+    margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.user-data-container {
+    width: clamp(0px, 100%, 450px);
+    margin: 0px auto;
+    text-align: left;
+    font-size: 1rem;
+    border: 1px solid gainsboro;
+    padding: 16px;
+    padding-top: 36px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.user-data-container>* {
+    margin: 0px;
+}
+
+.user-data-container span {
+    color: rgb(61, 61, 61);
+}
+
+.user-container .input-button {
+    margin: 24px auto;
+}
+
+.user-container .status.Guest {
+    background-color: rgb(238, 238, 238);
+    color: rgb(121, 121, 121);
+    border-radius: 25px;
+    padding: 2px 12px;
+    font-weight: 600;
+}
+
+.user-container .status {
+    background-color: rgb(199, 238, 225);
+    color: rgb(15, 145, 101);
+    border-radius: 25px;
+    padding: 2px 12px;
+    font-weight: 600;
+}
+
+.github-link svg {
+    width: 34px;
+    padding: 0px;
+    display: block;
+}
+
+.github-link a {
+    width: 34px;
+    padding: 0px;
+    height: fit-content;
+    display: block;
+}
+.github-link a:hover{
+    background-color: initial;
+}
+
+.user-button a{
+    transition: background-color 200ms, color 200ms;
+}
+
+.user-button a:hover{
+    background-color: white;
+    color: rgb(61, 61, 61);
+    outline: 2px solid rgb(61, 61, 61);
+}
