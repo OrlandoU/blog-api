@@ -5,7 +5,9 @@ var passport = require('passport')
 
 router.post('/login', authController.login)
 
-router.post('/sign-up')
+router.get('/info', passport.authenticate('jwt', {session: false}), authController.info)
+
+router.post('/sign-up', authController.sign_up)
 
 
 module.exports = router
