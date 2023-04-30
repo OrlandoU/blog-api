@@ -12,7 +12,7 @@ export default function CommentForm({ cb }) {
 
     const createComment = async () => {
         try {
-            const result = await fetch('http://localhost:3000/posts/' + urlParams.id + '/comments', {
+            const result = await fetch('https://expressblog.fly.dev/posts/' + urlParams.id + '/comments', {
                 method: 'POST',
                 body: JSON.stringify({ content }),
                 headers: { 'Content-Type': "application/json", authorization: 'bearer ' + tokenContext.userToken }
@@ -49,7 +49,7 @@ export default function CommentForm({ cb }) {
             <h1>Comment Section</h1>
             {user._id && <div className="comment-input">
                 <input type="text" value={content} onInput={handleContent} placeholder="Write your message here..." />
-                <button><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus</title><path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg></button>
+                <button><svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus</title><path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg></button>
             </div>}
 
         </form>

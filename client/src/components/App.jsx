@@ -1,8 +1,8 @@
 import '../assets/stylesheets/App.css';
 import 'react-toastify/dist/ReactToastify.css';
-import { Routes, Route, HashRouter, NavLink, useLocation } from 'react-router-dom'
+import { Routes, Route, HashRouter, NavLink } from 'react-router-dom'
 import Home from './Home/Home';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Post from './Post/Post';
 import NotFound from './NotFound';
 import { TokenContext } from '../Contexts/TokenContext';
@@ -24,7 +24,7 @@ function App() {
       return setUser({})
     }
     try {
-      const response = await fetch('http://localhost:3000/auth/info', {
+      const response = await fetch('https://expressblog.fly.dev/auth/info', {
         method: 'GET',
         headers: { 'authorization': 'bearer ' + userToken }
       })
@@ -49,6 +49,7 @@ function App() {
       localStorage.setItem('jwt', userToken)
       updateUser()
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userToken])
 
   //Retrieve token from local storage

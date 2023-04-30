@@ -7,11 +7,10 @@ export default function User({ handleLogout }) {
     const user = useContext(UserContext)
 
     const [posts, setPosts] = useState([])
-    const [comments, setComments] = useState([])
 
     const fetchPosts = async () => {
         try {
-            const response = await fetch('http://localhost:3000/posts?isPublished=false', {
+            const response = await fetch('https://expressblog.fly.dev/posts?isPublished=false', {
                 method: 'GET'
             })
             const data = await response.json()

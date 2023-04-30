@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import { TokenContext } from "../../Contexts/TokenContext"
 import toast from 'react-hot-toast'
-import { useLocation, useNavigate } from "react-router"
+import {  useNavigate } from "react-router"
 
 
 export default function PostForm({ formTitle, contentProp, fileProp, titleProp, idProp, fetchPosts }) {
@@ -35,7 +35,7 @@ export default function PostForm({ formTitle, contentProp, fileProp, titleProp, 
             formData.append('title', title)
             formData.append('content', content)
             formData.append('cover', file)
-            const result = await fetch('http://localhost:3000/posts', {
+            const result = await fetch('https://expressblog.fly.dev/posts', {
                 method: 'POST',
                 body: formData,
                 headers: {
@@ -64,7 +64,7 @@ export default function PostForm({ formTitle, contentProp, fileProp, titleProp, 
             formData.append('cover', file)
             console.log(file)
 
-            const result = await fetch('http://localhost:3000/posts/' + idProp, {
+            const result = await fetch('https://expressblog.fly.dev/posts/' + idProp, {
                 method: 'PUT',
                 body: formData,
                 headers: {
@@ -120,10 +120,10 @@ export default function PostForm({ formTitle, contentProp, fileProp, titleProp, 
                 </label>
                 <label htmlFor="">
                     Post Cover
-                    {(typeof file == 'string' && file == 'none') && <input type="file" name="cover" onChange={handleFile} />}
+                    {(typeof file == 'string' && file === 'none') && <input type="file" name="cover" onChange={handleFile} />}
                     {(typeof file !== 'string' || file !== 'none') && <div className="img-container">
-                        <span onClick={removeFile}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>close</title><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg></span>
-                        <img src={typeof file == 'string' ? "http://localhost:3000/images/" + file : URL.createObjectURL(file)} alt="post cover" />
+                        <span onClick={removeFile}><svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>close</title><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg></span>
+                        <img src={typeof file == 'string' ? "https://expressblog.fly.dev/images/" + file : URL.createObjectURL(file)} alt="post cover" />
                     </div>}
                 </label>
                 <button className="input-button">{formTitle}</button>

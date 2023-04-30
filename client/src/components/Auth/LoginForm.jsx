@@ -18,7 +18,7 @@ export default function LoginForm() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const result = await fetch('http://localhost:3000/auth/login', {
+            const result = await fetch('https://expressblog.fly.dev/auth/login', {
                 method: 'POST',
                 body: JSON.stringify({ password, username }),
                 headers: { 'Content-Type': "application/json" }
@@ -28,7 +28,7 @@ export default function LoginForm() {
                 document.querySelector(".modal-wrapper").click()
                 tokenObj.setUserToken(data.token)
                 toast.success('Logged')
-                
+
             } else {
                 throw new Error(data.message)
             }

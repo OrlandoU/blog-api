@@ -20,15 +20,15 @@ export default function SignForm() {
     const handleUsername = (e) => {
         setUsername(e.target.value)
     }
-    
+
     const handleEmail = (e) => {
         setEmail(e.target.value)
     }
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const result = await fetch('http://localhost:3000/auth/sign-up', {
+            const result = await fetch('https://expressblog.fly.dev/auth/sign-up', {
                 method: 'POST',
                 body: JSON.stringify({ password, username, passwordConfirmation, email }),
                 headers: { 'Content-Type': "application/json" }

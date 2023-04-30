@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 
 export default function Modal({ id, children }) {
     const ref = useRef()

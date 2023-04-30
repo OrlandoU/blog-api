@@ -7,7 +7,7 @@ export default function Home() {
 
     const fetchPosts = async () => {
         try {
-            const response = await fetch('http://localhost:3000/posts?isPublished=true', {
+            const response = await fetch('https://expressblog.fly.dev/posts?isPublished=true', {
                 method: 'GET'
             })
             const data = await response.json()
@@ -26,7 +26,7 @@ export default function Home() {
             <h1>Blog Posts</h1>
             <div className="posts-container">
                 {posts.map(post =>
-                    <Preview {...post} fetchPosts={fetchPosts}/>
+                    <Preview {...post} fetchPosts={fetchPosts} />
                 )}
             </div>
         </main>
