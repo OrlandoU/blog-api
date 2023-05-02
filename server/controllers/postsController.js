@@ -82,7 +82,6 @@ exports.post_put = [
             return res.status(400).send(errors)
         }
         try {
-            console.log(req.body)
             const oldPost = await Post.findById(req.params.postid)
             if (req.body.cover == 'none' && oldPost.cover !== '') {
                 const filepath = oldPost.cover
@@ -169,12 +168,12 @@ exports.comment_post = [
 ]
 
 exports.comment_delete = async (req, res, next) => {
-    const comment = await Comments.findById(req.params.id)
+    const comment = await Comments.findById(req.params.commentid)
     if (!comment.author.equals(req.user._id) && !req.user.isAdmin) {
         return res.sendStatus(403)
     }
     try {
-        const removedComment = await Comments.findByIdAndRemove(req.params.postid)
+        const removedComment = await Comments.findByIdAndRemove(req.params.commentid)
         res.json(removedComment)
     } catch (error) {
         next(error)
@@ -188,12 +187,4 @@ exports.comments_delete = async (req, res, next) => {
     } catch (error) {
         next(error)
     }
-}
-
-exports.post_publish = async (req, res, next) => {
-
-}
-
-exports.post_unpublish = async (req, res, next) => {
-
 }

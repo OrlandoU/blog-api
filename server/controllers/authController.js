@@ -51,7 +51,7 @@ exports.sign_up = [
         .isLength({ min: 8 })
         .withMessage('Invalid password length')
         .custom((value, { req }) => {
-            if (value !== req.body.password) {
+            if (value !== req.body.passwordConfirmation) {
                 throw new Error('Passwords do not match');
             }
             return true;
@@ -72,7 +72,7 @@ exports.sign_up = [
     , async (req, res, next) => {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
-            return res.status(400).send(errors)
+            return res.status(400).send(errors.array())
         }
 
         try {
@@ -80,7 +80,8 @@ exports.sign_up = [
             const user = new User({
                 username: req.body.username,
                 email: req.body.email,
-                password: hashedPassword
+                password: hashedPassword,
+                isAdmin: req.body.isAdmin
             })
 
             await user.save()

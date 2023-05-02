@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var mongoose = require('mongoose');
+require("./mongoConfig")
 var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy
 var passportjwt = require('passport-jwt')
@@ -28,19 +28,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use((req, res, next) => {
-  console.log(req.body)
-  next()
-})
 //Local Authentication Strategy
 passport.use(new LocalStrategy(async (username, password, done) => {
-  
   try {
     const user = await User.findOne({ username })
     if (!user) {
       return done(null, false, { message: 'Incorrect username' })
     }
-    await bcrypt.compare(password, user.password, (err, result) => {
+    bcrypt.compare(password, user.password, (err, result) => {
       if (err || !result) {
         return done(err, false, { message: 'Incorrect password' })
       }
@@ -67,13 +62,6 @@ app.use('/', indexRouter);
 app.use('/posts', postsRouter);
 app.use('/images', imageRouter)
 app.use('/auth', authRouter)
-
-mongoose.set('strictQuery', true)
-const connectionString = process.env.MongoDb_uri
-main().catch(err => console.log(err))
-async function main() {
-  await mongoose.connect(connectionString)
-}
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
